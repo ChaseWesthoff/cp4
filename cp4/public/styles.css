@@ -1,25 +1,64 @@
 body {
-    font-family: 'Arvo';
+    font-family: 'Helvetica';
     font-size: 16px;
     padding: 20px 100px 0px 100px;
-    background: #f3f3f3;
+    background: white;
+    text-align: center;
+
 }
 
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: pink;
+}
+
+nav li {
+    float: left;
+    display: inline;
+}
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #ff4c4c;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #ff6666;
+    color: white;
+}
+
+li a:hover {
+    background-color: #ff9999;
+}
 /* List */
 
 ul {
+  width: 65%;
+  margin: auto;
     list-style: none;
+
 }
 
 li {
-    background: #fff;
+
+    background-color: pink;
     width: 500px;
     min-height: 30px;
     padding: 10px;
     margin-bottom: 10px;
     font-size: 1em;
     display: flex;
-    align-items: center;
+
 }
 
 .delete {
@@ -27,7 +66,7 @@ li {
     margin-left: auto;
 }
 
-li:hover .delete {
+li .delete {
     display: block;
 }
 

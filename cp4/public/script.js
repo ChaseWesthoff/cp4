@@ -4,7 +4,8 @@ var app = new Vue({
     items: [],
     text: '',
     show: 'all',
-    priority: '1',
+    comment: '',
+    image: '',
     drag: {},
   },
 
@@ -42,59 +43,21 @@ var app = new Vue({
       });
     },
 
-    updatePriority: function(item) {
-      console.log(item.priority);
-      axios.put("/api/items/" + item.id, {
-        text: item.text,
-        priority: item.priority,
-        completed: item.completed,
-        orderChange: false,
-      }).then(response => {
-        return true;
-      }).catch(err => {
-      });
-    },
-
     addItem: function() {
       axios.post("/api/items", {
         text: this.text,
-        priority: this.priority,
-        completed: false
+        comment: this.comment,
+        image: this.image,
       }).then(response => {
         this.text = "";
-        this.priority = "1";
+        this.comment = "";
+        this.image = "";
         this.getItems();
         return true;
       }).catch(err => {
       });
     },
 
-    sortTop: function() {
-      this.items.sort(function (a,b) {
-        if (a.priority > b.priority) {
-          return 1;
-        }
-        return -1
-      }).reverse();
-      axios.put('/api/sortTop', {
-      }).then(response => {
-        this.getItems();
-        return true;
-      }).catch(err => {
-      });
-    },
-
-    completeItem: function(item) {
-      axios.put("/api/items/" + item.id, {
-        text: item.text,
-        priority: item.priority,
-        completed: !item.completed,
-        orderChange: false,
-      }).then(response => {
-        return true;
-      }).catch(err => {
-      });
-    },
     deleteItem: function(item) {
       axios.delete("/api/items/" + item.id).then(response => {
         this.getItems();
@@ -102,28 +65,15 @@ var app = new Vue({
       }).catch(err => {
       });
     },
-    showAll: function() {
-      this.show = 'all';
-    },
-    showActive: function() {
-      this.show = 'active';
-    },
-    showCompleted: function() {
-      this.show = 'completed';
-    },
-    deleteCompleted: function() {
-      this.items.forEach(item => {
-        if (item.completed)
-          this.deleteItem(item)
-      });
-    },
+
     dragItem: function(item) {
       this.drag = item;
     },
     dropItem: function(item) {
       axios.put("/api/items/" + this.drag.id, {
         text: this.drag.text,
-        priority: this.drag.priority,
+        comment: this.drag.comment,
+        image: this.drag.image,
         completed: this.drag.completed,
         orderChange: true,
         orderTarget: item.id

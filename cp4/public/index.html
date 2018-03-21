@@ -3,39 +3,35 @@
   <head>
     <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css"/>
-    <title>Vue Todo</title>
+    <title>Zach List</title>
   </head>
   <body>
+
+
+
+    <img style= "width: 40%" src= "http://104.236.159.146/images/Zach_Toothbrush.jpg" >
+
     <div id="app">
-      <h1>A List of Things To Do</h1>
-      <p v-show="activeItems.length === 0">You are done with all your tasks! Good job!</p>
+      <h1>Ask Zach Employee list</h1>
+      <p v-show="activeItems.length === 0">Nobody has applied to be Zach. Good Riddance. </p>
       <form v-on:submit.prevent="addItem">
+        <p> Zach Name </p>
   <input type="text" v-model="text">
-  <select v-model= "priority">
-  <option value="3"> High </option>
-  <option value="2"> Medium </option>
-  <option selected value="1"> Low </option>
-</select>
-  <button type="submit">Add</button>
+  <p> Special Comment </p>
+  <input type="text" v-model="comment">
+  <br>
+  <br>
+  <button type="submit">Add Zach</button>
+  <br>
+  <p> 
 
       </form>
-      <div class="controls">
-  <button v-on:click="showAll()">Show All</button>
-  <button v-on:click="showActive()">Show Active</button>
-  <button v-on:click="showCompleted()">Show Completed</button>
-  <button v-on:click="deleteCompleted()">Delete Completed</button>
-  <button v-on:click="sortTop()">Sort By Priority</button>
-  
-      </div>
+
       <ul>
   <li v-for="item in filteredItems" draggable="true" v-on:dragstart="dragItem(item)" v-on:dragover.prevent v-on:drop="dropItem(item)">
-    <input type="checkbox" v-model="item.completed" v-on:click="completeItem(item)" /> 
-    <label v-bind:class="{ completed: item.completed }">{{ item.text }}</label> Priority
-<select v-on:change="updatePriority(item)"  v-model="item.priority">
-  <option value="3"> High </option>
-  <option value="2"> Medium </option>
-  <option value="1"> Low </option>
-</select><button v-on:click="deleteItem(item)" class="delete">X</button>
+    
+    <label v-bind:class="{ completed: item.completed }">{{ item.text }}</label> {{ item.comment }}
+  <button v-on:click="deleteItem(item)" class="delete"> Fire Zach </button>
   </li>
       </ul>
     </div>
@@ -43,6 +39,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js" integrity="sha256-pU9euBaEcVl8Gtg+FRYCtin2vKLN8sx5/4npZDmY2VA=" crossorigin="anonymous"></script>
     <script src="/script.js"></script>
 
-    <p style="text-align: center"> <a href="https://github.com/BYU-CS260-Winter-2018/lab-4-ChaseWesthoff"> This </a> is the github for this assignment </p>
+    <p style="text-align: center"> <a href="https://github.com/ChaseWesthoff/cp4"> This </a> is the github for this assignment </p>
   </body>
 </html>

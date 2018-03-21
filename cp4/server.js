@@ -30,9 +30,10 @@ app.put('/api/items/:id', (req, res) => {
   let itemsMap = items.map(item => { return item.id; });
   let index = itemsMap.indexOf(id);
   let item = items[index];
-  item.priority = req.body.priority;
+  item.comment = req.body.comment;
   item.completed = req.body.completed;
   item.text = req.body.text;
+  item.image = req.body.image;
   // handle drag and drop re-ordering
   if (req.body.orderChange) {
     let indexTarget = itemsMap.indexOf(req.body.orderTarget);
@@ -42,20 +43,9 @@ app.put('/api/items/:id', (req, res) => {
   res.send(item);
 });
 
-app.put('/api/sortTop', (req, res) => {
-  items.sort(function (a,b) {
-    if (a.priority > b.priority) {
-      return 1;
-    }
-    return -1
-  }).reverse();
-});
-
-
-
 app.post('/api/items', (req, res) => {
   id = id + 1;
-  let item = {id:id, text:req.body.text, priority: req.body.priority ,completed: req.body.completed};
+  let item = {id:id, text:req.body.text, comment: req.body.comment, image: req.body.image ,completed: req.body.completed};
   items.push(item);
   res.send(item);
 });
